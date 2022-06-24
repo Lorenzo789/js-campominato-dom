@@ -1,7 +1,19 @@
 
 
-const btnGameStart = document.getElementById('btn-grid-game')
+/*  generare 16 bombe casuali
+ nell' array delle bombe non possono esserci due numeri uguali.
 
+ click sulla cella blu se va bene rossa se è una bomba e fine partita (disabilitare il click)
+
+ punteggio a fine partita con un alert? o semplicemente in console
+
+
+*/
+
+// array bombe
+const listBomb = [];
+
+const btnGameStart = document.getElementById('btn-grid-game')
 
 btnGameStart.addEventListener( 'click', function() {
 
@@ -10,6 +22,16 @@ btnGameStart.addEventListener( 'click', function() {
     const parentGrid = document.getElementById("grid-game");
     
     parentGrid.classList.add('grid-container')
+    
+    for (let index = 0; index < 17; index++) {
+
+        const bombUnique = bombGenerator (listBomb, 1 , 100);
+
+        listBomb.push(bombUnique);
+
+        console.log(listBomb); 
+
+   }
     
     for (let index = 0; index < 100; index++) {
         
@@ -20,14 +42,16 @@ btnGameStart.addEventListener( 'click', function() {
         parentGrid.append(newSquare);
         
         newSquare.addEventListener( 'click', function(){
-    
+            
             newSquare.classList.toggle('active');
-
+            
             console.log('hai cliccato il numero' , + index + 1);
-    
+            
+            
         })
-
+        
     }
+
 })
 
 
@@ -41,42 +65,22 @@ function createNewSquare() {
 }
 
 
-
-
-
-/*  generare 16 bombe casuali
- nell' array delle bombe non possono esserci due numeri uguali.
-
- click sulla cella blu se va bene rossa se è una bomba e fine partita (disabilitare il click)
-
- punteggio a fine partita con un alert? o semplicemente in console
-
-
-*/
-
-
-
-function bombGenerator () {
+function bombGenerator (bombNumberList, min , max) {
+        
+    let randomBomb;
     
+    let validBomb = false;
+        
+    while (validBomb === false) {
     
+        randomBomb = (Math.floor(Math.random() * max) + min);
     
+        if ( !bombNumberList.includes(randomBomb)) {
+                
+            validBomb = true;
     
+        }
+    }   
+    
+    return randomBomb;
 }
-
-
-// array bombe
-const listBomb = [];
-
-for (let i = 0; i < 17; i++) {
-    
-    // genero dei numeri casuali da 1 a 100
-    let randomBomb = (Math.floor( Math.random() * 100) + 1);
-
-    // push numero random nella lista bombe
-    listBomb.push(randomBomb);
-    
-
-
-}
-
-console.log(listBomb);

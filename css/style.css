@@ -69,3 +69,8 @@ main>h1{
     background-color: #87CEFA;
     cursor: pointer;
 }
+
+.active-bomb{
+    background-color: red;
+    cursor: pointer;
+}
