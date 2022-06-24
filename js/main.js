@@ -23,15 +23,14 @@ btnGameStart.addEventListener( 'click', function() {
     
     parentGrid.classList.add('grid-container')
     
-    for (let index = 0; index < 17; index++) {
-
-        const bombUnique = bombGenerator (listBomb, 1 , 100);
-
-        listBomb.push(bombUnique);
-
-        console.log(listBomb); 
-
-   }
+        for (let index = 0; index < 17; index++) {
+    
+            const bombUnique = bombGenerator (listBomb, 1 , 100);
+    
+            listBomb.push(bombUnique);
+    
+            console.log(listBomb); 
+        }
     
     for (let index = 0; index < 100; index++) {
         
@@ -43,24 +42,22 @@ btnGameStart.addEventListener( 'click', function() {
         
         newSquare.addEventListener( 'click', function(){
             
-            if (newSquare == listBomb.values) {
+            if (newSquare === listBomb.includes(bombUnique)) {
                 
                 newSquare.classList.add('active-bomb');
-
+                
                 this.addEventListener.disabled;
-
+                
             } else {
-
+                
                 newSquare.classList.add('active');
-    
                 
                 console.log('hai cliccato il numero' , + index + 1);
-
-
             }
-
+            
         }) 
     }
+
 })
 
 
