@@ -43,15 +43,24 @@ btnGameStart.addEventListener( 'click', function() {
         
         newSquare.addEventListener( 'click', function(){
             
-            newSquare.classList.toggle('active');
-            
-            console.log('hai cliccato il numero' , + index + 1);
-            
-            
-        })
-        
-    }
+            if (newSquare == listBomb.values) {
+                
+                newSquare.classList.add('active-bomb');
 
+                this.addEventListener.disabled;
+
+            } else {
+
+                newSquare.classList.add('active');
+    
+                
+                console.log('hai cliccato il numero' , + index + 1);
+
+
+            }
+
+        }) 
+    }
 })
 
 
@@ -81,6 +90,6 @@ function bombGenerator (bombNumberList, min , max) {
     
         }
     }   
-    
+
     return randomBomb;
 }
