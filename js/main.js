@@ -12,7 +12,7 @@
 
 // array bombe
 const listBomb = [];
-
+ 
 let endGame;
 
 const btnGameStart = document.getElementById('btn-grid-game')
@@ -25,31 +25,35 @@ btnGameStart.addEventListener( 'click', function() {
     
     let parentGrid = document.getElementById("grid-game");
     
-    parentGrid.classList.add('grid-container')
+    parentGrid.classList.add('grid-container');
     
     for (let index = 0; index < 17; index++) {
     
         const bombUnique = bombGenerator (listBomb, 1 , 100);
     
         listBomb.push(bombUnique);
-    
+        
+        console.log( index + 1 , listBomb);
     }
     
     for (let index = 0; index < 100; index++) {
         
         const newSquare = createNewSquare();
         
-        parentGrid.append(newSquare);
+        let winGame = ((index + 1) - 16);
+        console.log(winGame);
+
+        newSquare.innerHTML = (index + 1);
         
+        parentGrid.append(newSquare);
+
         newSquare.addEventListener( 'click', function(){
 
-            console.log( index + 1 , listBomb);
-
             if (listBomb.includes(index + 1)) {
-                
+
                 newSquare.classList.add('active-bomb');  
 
-                endGame = true
+                // endGame = true;
 
                 if (endGame == true) {
                     
@@ -57,7 +61,7 @@ btnGameStart.addEventListener( 'click', function() {
 
                     parentGrid.classList.remove('grid-container');
 
-                    alert('Hai Perso!!!! Premi Play per Riprovarci')
+                    alert('Hai Perso!!!! Premi Play per Riprovarci');
 
                     document.getElementById("btn-grid-game").disabled = false;
                 }
@@ -65,13 +69,15 @@ btnGameStart.addEventListener( 'click', function() {
             } else {
                 
                 newSquare.classList.add('active');
-                
-                // console.log('hai cliccato il numero' , + index + 1);
+
+                if (newSquare.className('active') == winGame){
+                    
+                    console.log('hai vinto');
+                }
             }
             
         }) 
     }
-
 })
 
 
