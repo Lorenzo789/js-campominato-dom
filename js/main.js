@@ -13,46 +13,59 @@
 // array bombe
 const listBomb = [];
 
+let endGame;
+
 const btnGameStart = document.getElementById('btn-grid-game')
 
 btnGameStart.addEventListener( 'click', function() {
 
+    endGame = false;
+    console.log(endGame);
+
     document.getElementById("btn-grid-game").disabled = true;
     
-    const parentGrid = document.getElementById("grid-game");
+    let parentGrid = document.getElementById("grid-game");
     
     parentGrid.classList.add('grid-container')
     
-        for (let index = 0; index < 17; index++) {
+    for (let index = 0; index < 17; index++) {
     
-            const bombUnique = bombGenerator (listBomb, 1 , 100);
+        const bombUnique = bombGenerator (listBomb, 1 , 100);
     
-            listBomb.push(bombUnique);
+        listBomb.push(bombUnique);
     
-            console.log(listBomb); 
-        }
+    }
     
     for (let index = 0; index < 100; index++) {
         
         const newSquare = createNewSquare();
         
-        newSquare.innerHTML = (index + 1);
-        
         parentGrid.append(newSquare);
         
         newSquare.addEventListener( 'click', function(){
-            
-            if (newSquare === listBomb.includes(bombUnique)) {
+
+            console.log( index + 1 , listBomb);
+
+            if (listBomb.includes(index + 1)) {
                 
-                newSquare.classList.add('active-bomb');
-                
-                this.addEventListener.disabled;
-                
+                newSquare.classList.add('active-bomb');  
+
+                endGame = true
+
+                if (endGame == true) {
+                    
+                    parentGrid.innerHTML = null;
+
+                    parentGrid.classList.remove('grid-container');
+
+                    alert('Hai Perso!!!! Ricarica la pagina per riprovarci')
+                }
+
             } else {
                 
                 newSquare.classList.add('active');
                 
-                console.log('hai cliccato il numero' , + index + 1);
+                // console.log('hai cliccato il numero' , + index + 1);
             }
             
         }) 
