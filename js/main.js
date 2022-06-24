@@ -53,3 +53,30 @@ function createNewSquare() {
 
 
 */
+
+
+
+function bombGenerator () {
+    
+    
+    
+    
+}
+
+
+// array bombe
+const listBomb = [];
+
+for (let i = 0; i < 17; i++) {
+    
+    // genero dei numeri casuali da 1 a 100
+    let randomBomb = (Math.floor( Math.random() * 100) + 1);
+
+    // push numero random nella lista bombe
+    listBomb.push(randomBomb);
+    
+
+
+}
+
+console.log(listBomb);
