@@ -20,7 +20,6 @@ const btnGameStart = document.getElementById('btn-grid-game')
 btnGameStart.addEventListener( 'click', function() {
 
     endGame = false;
-    console.log(endGame);
 
     document.getElementById("btn-grid-game").disabled = true;
     
@@ -58,7 +57,9 @@ btnGameStart.addEventListener( 'click', function() {
 
                     parentGrid.classList.remove('grid-container');
 
-                    alert('Hai Perso!!!! Ricarica la pagina per riprovarci')
+                    alert('Hai Perso!!!! Premi Play per Riprovarci')
+
+                    document.getElementById("btn-grid-game").disabled = false;
                 }
 
             } else {
