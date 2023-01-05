@@ -28,17 +28,71 @@ btnGameStart.addEventListener( 'click', function() {
     
     // creo una variabile per inserire poi i miei quadratini
     let parentGrid = document.getElementById("grid-game");
+
+    // prendo il valore selezionato della difficolta
+    const difficultySelect = document.getElementById("select-difficulty").value;
     
     // aggiungo una classe al parent
     parentGrid.classList.add('grid-container');
     
+    if (difficultySelect == "1") {
+        createGame(100, 'square', 100);
+    } else if (difficultySelect == "2") {
+        createGame(60, 'square-medium', 60);
+    } else if (difficultySelect == "3") {
+        createGame(20, 'square-hard', 20);
+    }
+})
+
+
+// * FUNCTIONS * \\
+function createNewSquare(classToAdd) {
+    const square = document.createElement('div');
+
+    square.classList.add(classToAdd);
+
+    return square;
+}
+
+
+function bombGenerator (bombNumberList, min , max) {
+        
+    let randomBomb;
+    
+    let validBomb = false;
+        
+    while (validBomb === false) {
+    
+        randomBomb = (Math.floor(Math.random() * max) + min);
+    
+        if ( !bombNumberList.includes(randomBomb)) {
+                
+            validBomb = true;
+    
+        }
+    }   
+
+    return randomBomb;
+}
+
+function createGame(square, classToAdd, maxBomb) {
+
+    // creo una variabile per inserire poi i miei quadratini
+    let parentGrid = document.getElementById("grid-game");
+
+    // aggiungo una classe al parent
+    parentGrid.classList.add('grid-container');
+
+    // variabile per la condizione di vittora
+    let winGame = ((maxBomb) - (16));
+
     listBomb = [];
 
     // ciclo for per la generazione casuale di 16 bombe
-    for (let index = 0; index <= 16; index++) {
+    for (let index = 1; index <= 16; index++) {
         
         // variabile per la generazione delle bombe
-        const bombUnique = bombGenerator (listBomb, 1 , 100);
+        const bombUnique = bombGenerator (listBomb, 1, maxBomb);
         
         // inserire le bombe generate casualmente nell'array
         listBomb.push(bombUnique);
@@ -46,14 +100,11 @@ btnGameStart.addEventListener( 'click', function() {
         console.log(listBomb);
     }
 
-    // variabile per la condizione di vittora
-    let winGame = ((100) - (16));
-
-    // ciclo for per la creazione dei quadratini
-    for (let index = 0; index < 100; index++) {
+     // ciclo for per la creazione dei quadratini
+     for (let index = 0; index < square; index++) {
         
         // funzione per la creazione di 100 div
-        const newSquare = createNewSquare();
+        const newSquare = createNewSquare(classToAdd);
         
         // inserisco i 100 div nel parent
         parentGrid.append(newSquare);
@@ -100,39 +151,7 @@ btnGameStart.addEventListener( 'click', function() {
                     document.getElementById("btn-grid-game").disabled = false;
                 }
             }
-
         }) 
     }
-})
-
-
-// * FUNCTIONS * \\
-function createNewSquare() {
-    const square = document.createElement('div');
-
-    square.classList.add('square');
-
-    return square;
-}
-
-
-function bombGenerator (bombNumberList, min , max) {
-        
-    let randomBomb;
-    
-    let validBomb = false;
-        
-    while (validBomb === false) {
-    
-        randomBomb = (Math.floor(Math.random() * max) + min);
-    
-        if ( !bombNumberList.includes(randomBomb)) {
-                
-            validBomb = true;
-    
-        }
-    }   
-
-    return randomBomb;
 }
 // * FUNCTIONS * \\
